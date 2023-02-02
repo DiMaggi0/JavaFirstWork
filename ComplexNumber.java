@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -54,12 +55,35 @@ public class ComplexNumber{
     /**
      * Конструктор, позволяющий задать действительную и мнимую часть комплексного числа.
      */
-    public ComplexNumber(){
+    public ComplexNumber() throws InputMismatchException{
         Scanner enter = new Scanner(System.in);
-        System.out.println("Введите действительную часть числа:");
-        this.setReal_part(enter.nextDouble());
-        System.out.println("Введите мнимую часть числа");
-        this.setImaginary_part(enter.nextDouble());
+        boolean flag = false;
+        while(!flag) {
+            try{
+            System.out.println("Введите действительную часть числа:");
+            this.setReal_part(enter.nextDouble());
+            if(this.getReal_part() == (double) this.getReal_part()){
+                flag = true;
+            }
+            }catch(InputMismatchException e){
+                System.out.println("Введите целое или действительное число, отделяя дробную часть запятой.");
+                enter.next();
+            }
+        }
+        flag = false;
+        while(!flag) {
+            try{
+            System.out.println("Введите мнимую часть числа:");
+            this.setImaginary_part(enter.nextDouble());
+            if(this.getImaginary_part() == (double) this.getImaginary_part()){
+                flag = true;
+            }
+            }catch(InputMismatchException e){
+                System.out.println("Введите целое или действительное число, отделяя дробную часть запятой.");
+                enter.next();
+            }
+
+        }
     }
 
     /**

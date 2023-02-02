@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -148,12 +149,34 @@ public class Matrix {
     /**
      * Конструктор класса Matrix, позволяющий задать количество строк и столбцов матрицы, а также ее элементы.
      */
-    public Matrix(){
+    public Matrix() throws InputMismatchException {
         Scanner enter = new Scanner(System.in);
-        System.out.println("Введите число строк матрицы:");
-        this.setNumb_of_rows(enter.nextInt());
-        System.out.println("Введите число столбцов матрицы:");
-        this.setNumb_of_col(enter.nextInt());
+        boolean flag = false;
+        while(!flag) {
+            try {
+                System.out.println("Введите число строк матрицы:");
+                this.setNumb_of_rows(enter.nextInt());
+                if(this.getNumb_of_rows() == (int)this.getNumb_of_rows()){
+                    flag = true;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Количество строк матрицы может быть только целым числом!");
+                enter.next();
+            }
+        }
+        flag = false;
+        while(!flag) {
+            try {
+                System.out.println("Введите число столбцов матрицы:");
+                this.setNumb_of_col(enter.nextInt());
+                if(this.getNumb_of_col() == (int)this.getNumb_of_col()){
+                    flag = true;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Количество столбцов матрицы может быть только целым числом!");
+                enter.next();
+            }
+        }
         for(int i = 0; i < this.getNumb_of_rows(); ++i){
             for(int j = 0; j < this.getNumb_of_col(); ++j){
                 System.out.println("matrix" + "["+ i+"]" + "["+j+"]: ");
@@ -182,9 +205,9 @@ public class Matrix {
         for (int i = 0; i < this.getNumb_of_rows(); ++i) {
             for (int j = 0; j < this.getNumb_of_col(); ++j) {
                 if (j == this.getNumb_of_col() - 1) {
-                    System.out.print(this.matrix[i][j] + '\n');
+                    System.out.printf("%-30s"+'\n', this.matrix[i][j]);
                 } else {
-                    System.out.print(this.matrix[i][j] + "   ");
+                    System.out.printf("%-30s" + "   ", this.matrix[i][j]);
                 }
             }
         }
