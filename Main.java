@@ -1,9 +1,13 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 public class Main {
+
     public static void main(String[] args) throws InputMismatchException {
+
         while (true) {
             Scanner enter = new Scanner(System.in);
+            functionsForInput t = new functionsForInput();
             int value = -1;
             while(true) {
                 try {
@@ -24,49 +28,55 @@ public class Main {
                     System.out.println("Начнем работу! Введите комплексное число");
                     System.out.println("При вводе действительных чисел отделяйте дробную часть запятой!");
                     ComplexNumber h1 = new ComplexNumber();
-                while (true) {
-                    int chooseWithNumb = -1;
-                    while(true) {
-                        try{
-                        System.out.print("Введенное вами число = ");
-                        h1.printNumberInAlgForm();
-                        System.out.println();
-                        System.out.println("Выберите дальнейшие действия с числом:");
-                        System.out.println("1 - Прибавить другое число.");
-                        System.out.println("2 - Умножить на другое число.");
-                        System.out.println("3 - Вывести число в тригонометрической форме.");
-                        System.out.println("0 - Выйти из программы.");
-                        chooseWithNumb = enter.nextInt();
-                        if(chooseWithNumb != -1){
-                            break;
-                        }
-                        }catch(InputMismatchException e){
-                            System.out.println("Введите целое число!");
-                            enter.next();
-                        }
-                    }
-                    if (chooseWithNumb == 1) {
-                        System.out.println("Введите прибавляемое число:");
-                        ComplexNumber h2 = new ComplexNumber();
-                        System.out.print("Сумма введенных чисел равна = ");
-                        h1.sumOfNumbers(h2).printNumberInAlgForm();
-                        System.out.println();
-                    } else if (chooseWithNumb == 2) {
-                        System.out.println("Введите умножаемое число:");
-                        ComplexNumber h2 = new ComplexNumber();
-                        System.out.print("Произведение введенных чисел равно = ");
-                        h1.productOfNumbers(h2).printNumberInAlgForm();
-                        System.out.println();
-                    } else if (chooseWithNumb == 3) {
-                        System.out.println("Число в тригонометрической форме:");
-                        h1.printNumberInTrigForm();
-                    } else if (chooseWithNumb == 0) {
-                        break;
-                    }
+                    t.enterComplexNumber(h1);
 
-                else{
-                    System.out.println("Действия под такой цифрой еще нет!");
-                }}
+
+
+                        while (true) {
+                            int chooseWithNumb = -1;
+                            while (true) {
+                                try {
+                                    System.out.print("Введенное вами число = ");
+                                    h1.printNumberInAlgForm();
+                                    System.out.println();
+                                    System.out.println("Выберите дальнейшие действия с числом:");
+                                    System.out.println("1 - Прибавить другое число.");
+                                    System.out.println("2 - Умножить на другое число.");
+                                    System.out.println("3 - Вывести число в тригонометрической форме.");
+                                    System.out.println("0 - Выйти из программы.");
+                                    chooseWithNumb = enter.nextInt();
+                                    if (chooseWithNumb != -1) {
+                                        break;
+                                    }
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Введите целое число!");
+                                    enter.next();
+                                }
+                            }
+                            if (chooseWithNumb == 1) {
+                                System.out.println("Введите прибавляемое число:");
+                                ComplexNumber h2 = new ComplexNumber();
+                                t.enterComplexNumber(h2);
+
+                                System.out.print("Сумма введенных чисел равна = ");
+                                h1.sumOfNumbers(h2).printNumberInAlgForm();
+                                System.out.println();
+                            } else if (chooseWithNumb == 2) {
+                                System.out.println("Введите умножаемое число:");
+                                ComplexNumber h2 = new ComplexNumber();
+                                t.enterComplexNumber(h2);
+                                System.out.print("Произведение введенных чисел равно = ");
+                                h1.productOfNumbers(h2).printNumberInAlgForm();
+                                System.out.println();
+                            } else if (chooseWithNumb == 3) {
+                                System.out.println("Число в тригонометрической форме:");
+                                h1.printNumberInTrigForm();
+                            } else if (chooseWithNumb == 0) {
+                                break;
+                            } else {
+                                System.out.println("Действия под такой цифрой еще нет!");
+                            }
+                        }
 
 
             } else if (value == 2) {
@@ -74,6 +84,7 @@ public class Main {
                     System.out.println("Введите размерности матрицы и её элементы:");
                     System.out.println("Элементами матрицы могут быть как целые и действительные числа, так и комплексные числа в форме '4+5*i'");
                     Matrix h = new Matrix();
+                    t.enterMatrix(h);
                 while (true) {
                     int chooseWithMatrix = -1;
                     while(true) {
@@ -98,12 +109,14 @@ public class Main {
                         System.out.println("Введите вторую матрицу:");
                         System.out.println("Элементами матрицы могут быть как целые и действительные числа, так и комплексные числа в форме '4+5*i'");
                         Matrix h4 = new Matrix();
+                        t.enterMatrix(h4);
                         System.out.println("Полученная матрица:");
                         System.out.println(h.sumOfMatrix(h4));
                     } else if (chooseWithMatrix == 2) {
                         System.out.println("Введите вторую матрицу:");
                         System.out.println("Элементами матрицы могут быть как целые и действительные числа, так и комплексные числа в форме '4+5*i'");
                         Matrix h4 = new Matrix();
+                        t.enterMatrix(h4);
                         System.out.println("Полученная матрица:");
                         System.out.println(h.productOfMatrix(h4));
                     } else if (chooseWithMatrix == 3) {

@@ -1,11 +1,12 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 /**
  * @author Петров Дмитрий
  * Класс, содержащий набор методов для работы с комплексными числами
  */
 public class ComplexNumber{
+
     /**
      * Метод, получающий действительную часть комплексного числа
      * @return Возвращает комплексную часть комплексного числа
@@ -52,39 +53,12 @@ public class ComplexNumber{
         this.setReal_part(real_part);
     }
 
-    /**
-     * Конструктор, позволяющий задать действительную и мнимую часть комплексного числа.
-     */
-    public ComplexNumber() throws InputMismatchException{
-        Scanner enter = new Scanner(System.in);
-        boolean flag = false;
-        while(!flag) {
-            try{
-            System.out.println("Введите действительную часть числа:");
-            this.setReal_part(enter.nextDouble());
-            if(this.getReal_part() == (double) this.getReal_part()){
-                flag = true;
-            }
-            }catch(InputMismatchException e){
-                System.out.println("Введите целое или действительное число, отделяя дробную часть запятой.");
-                enter.next();
-            }
-        }
-        flag = false;
-        while(!flag) {
-            try{
-            System.out.println("Введите мнимую часть числа:");
-            this.setImaginary_part(enter.nextDouble());
-            if(this.getImaginary_part() == (double) this.getImaginary_part()){
-                flag = true;
-            }
-            }catch(InputMismatchException e){
-                System.out.println("Введите целое или действительное число, отделяя дробную часть запятой.");
-                enter.next();
-            }
 
-        }
-    }
+    /**
+     * Конструктор, создающий ссылочную переменную, указывающую на пустой объект класса ComplexNumber
+      */
+
+    public ComplexNumber(){}
 
     /**
      * Метод, выводящий число в алгебраической форме
@@ -150,6 +124,45 @@ public class ComplexNumber{
      */
     ComplexNumber productOfNumbers(ComplexNumber h1){ // метод для произведения двух комплексных чисел
         return new ComplexNumber(this.getReal_part()*h1.getReal_part() - this.getImaginary_part()*h1.getImaginary_part(), (this.getReal_part()* h1.getImaginary_part()) + (this.getImaginary_part()*h1.getReal_part()));
+    }
+    public String funcForOperations(String first_num, String second_num, String what_operation) {
+        ComplexNumber h1 = new ComplexNumber();
+        ComplexNumber h2 = new ComplexNumber();
+        String[] arr1 = first_num.split("\\+|\\*");
+        String[] arr2 = second_num.split("\\+|\\*");
+        if (arr1.length == 1) {
+            h1.setReal_part(Double.parseDouble(arr1[0]));
+            h1.setImaginary_part(0);
+        }
+        if (arr2.length == 1) {
+            h2.setReal_part(Double.parseDouble(arr2[0]));
+            h2.setImaginary_part(0);
+        }
+        if (arr1.length == 2) {
+            h1.setReal_part(0);
+            h1.setImaginary_part(Double.parseDouble(arr1[0]));
+        }
+        if (arr2.length == 2) {
+            h2.setReal_part(0);
+            h2.setImaginary_part(Double.parseDouble(arr2[0]));
+        }
+        if (arr1.length == 3) {
+            h1.setReal_part(Double.parseDouble(arr1[0]));
+            h1.setImaginary_part(Double.parseDouble(arr1[1]));
+        }
+        if (arr2.length == 3) {
+            h2.setReal_part(Double.parseDouble(arr2[0]));
+            h2.setImaginary_part(Double.parseDouble(arr2[1]));
+        }
+
+        if (what_operation.equals("prod")) {
+            return h1.productOfNumbers(h2).returnNumberInAlgForm();
+        }else if (what_operation.equals("sum")) {
+            return h1.sumOfNumbers(h2).returnNumberInAlgForm();
+        }
+        else{
+            return "0";
+        }
     }
 
 }
