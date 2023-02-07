@@ -3,21 +3,21 @@ import java.util.InputMismatchException;
 
 /**
  * @author Петров Дмитрий
- * Класс, содержащий набор методов для работы с комплексными числами
+ * Класс, содержащий набор методов для работы с комплексными числами.
  */
 public class ComplexNumber{
 
     /**
-     * Метод, получающий действительную часть комплексного числа
-     * @return Возвращает комплексную часть комплексного числа
+     * Метод, получающий действительную часть комплексного числа.
+     * @return Возвращает комплексную часть комплексного числа.
      */
     public double getReal_part() {
         return real_part;
     }
 
     /**
-     * Метод, задающий действительную часть комплексного числа, передающуюся в качестве параметра
-     * @param real_part действительная часть комплексного числа
+     * Метод, задающий действительную часть комплексного числа, передающуюся в качестве параметра.
+     * @param real_part Действительная часть комплексного числа.
      */
     public void setReal_part(double real_part) {
         this.real_part = real_part;
@@ -26,16 +26,16 @@ public class ComplexNumber{
     private double real_part; // действительная часть комплексного числа
 
     /**
-     * Метод, получающий мнимую часть комплексного числа
-     * @return Возвращает мнимую часть комплексного числа
+     * Метод, получающий мнимую часть комплексного числа.
+     * @return Возвращает мнимую часть комплексного числа.
      */
     public double getImaginary_part() {
         return imaginary_part;
     }
 
     /**
-     * Метод, задающий мнимую часть комплексного числа, передающуюся в качестве параметра
-     * @param imaginary_part мнимая часть комплексного числа
+     * Метод, задающий мнимую часть комплексного числа, передающуюся в качестве параметра.
+     * @param imaginary_part Мнимая часть комплексного числа.
      */
     public void setImaginary_part(double imaginary_part) {
         this.imaginary_part = imaginary_part;
@@ -44,9 +44,9 @@ public class ComplexNumber{
     private double imaginary_part; // мнимая часть комплексного числа
 
     /**
-     * Конструктор, создающий комплексное число по передаваемым параметрам
-     * @param real_part, действительная часть комплексного числа
-     * @param imaginary_part, мнимая часть комплексного числа
+     * Конструктор, создающий комплексное число по передаваемым параметрам.
+     * @param real_part Действительная часть комплексного числа.
+     * @param imaginary_part Мнимая часть комплексного числа.
      */
     public ComplexNumber(double real_part, double imaginary_part){ // конструктор для комплексных чисел
         this.setImaginary_part(imaginary_part);
@@ -55,13 +55,13 @@ public class ComplexNumber{
 
 
     /**
-     * Конструктор, создающий ссылочную переменную, указывающую на пустой объект класса ComplexNumber
+     * Конструктор, создающий ссылочную переменную, указывающую на пустой объект класса ComplexNumber.
       */
 
     public ComplexNumber(){}
 
     /**
-     * Метод, выводящий число в алгебраической форме
+     * Метод, выводящий число в алгебраической форме.
      */
     void printNumberInAlgForm(){
         if( this.getReal_part() != 0 && this.getImaginary_part() != 0)
@@ -109,8 +109,8 @@ public class ComplexNumber{
     }
 
     /**
-     * Метод, складывающий два комплексных числа, создающий новое комплексное число, являющееся результатом сложения
-     * @param h1 комплексное число, прибавляемое к числу, к которому применяется метод
+     * Метод, складывающий два комплексных числа, создающий новое комплексное число, являющееся результатом сложения.
+     * @param h1 Комплексное число, прибавляемое к числу, к которому применяется метод.
      * @return Возвращает новое комплексное число, являющееся результатом сложения двух чисел.
      */
     ComplexNumber sumOfNumbers(ComplexNumber h1){
@@ -118,13 +118,33 @@ public class ComplexNumber{
     }
 
     /**
-     * Метод, умножающий два комплексных числа, создающий новое комплексное число, являющееся результатом умножения
-     * @param h1 комплексное число, умножаемое на число, к которому применяется метод
-     * @return Возвращает новое комплексное число, являющееся результатом умножения двух чисел
+     * Метод, умножающий два комплексных числа, создающий новое комплексное число, являющееся результатом умножения.
+     * @param h1 Комплексное число, умножаемое на число, к которому применяется метод.
+     * @return Возвращает новое комплексное число, являющееся результатом умножения двух чисел.
      */
     ComplexNumber productOfNumbers(ComplexNumber h1){ // метод для произведения двух комплексных чисел
         return new ComplexNumber(this.getReal_part()*h1.getReal_part() - this.getImaginary_part()*h1.getImaginary_part(), (this.getReal_part()* h1.getImaginary_part()) + (this.getImaginary_part()*h1.getReal_part()));
     }
+
+    /**
+     * Метод, делящий одно число на другое, создающий новое комплексное число, являющееся результатом деления.
+     * @param h1 Комплексное число, делитель того числа, к которому применяется данный метод.
+     * @return Возвращает новое комплексное число, являющееся результатом деления двух чисел.
+     */
+    ComplexNumber divisionOfNumber(ComplexNumber h1){
+        return new ComplexNumber((this.getReal_part()*h1.getReal_part() + this.getImaginary_part()*h1.getImaginary_part())/(Math.pow(h1.getReal_part(), 2) + Math.pow(h1.getImaginary_part(), 2)), (h1.getReal_part()*this.getImaginary_part() - h1.getImaginary_part()*this.getReal_part())/(Math.pow(h1.getReal_part(), 2) + Math.pow(h1.getImaginary_part(), 2)));
+    }
+    ComplexNumber subtractionOfNumbers(ComplexNumber h1){
+        return new ComplexNumber(this.getReal_part() - h1.getReal_part(), this.getImaginary_part()-h1.getImaginary_part());
+    }
+
+    /**
+     * Метод, позволяющий выполнять арифметические операции как с действительными, так и с комплексными числами.
+     * @param first_num Первое число как объект класса ComplexNumber.
+     * @param second_num Второе число как объект класса ComplexNumber.
+     * @param what_operation Строка, говорящая, какой тип операции над числами должен выполниться.
+     * @return Возвращает число в виде строки - результат арифметической операции над числами.
+     */
     public String funcForOperations(String first_num, String second_num, String what_operation) {
         ComplexNumber h1 = new ComplexNumber();
         ComplexNumber h2 = new ComplexNumber();
@@ -159,6 +179,12 @@ public class ComplexNumber{
             return h1.productOfNumbers(h2).returnNumberInAlgForm();
         }else if (what_operation.equals("sum")) {
             return h1.sumOfNumbers(h2).returnNumberInAlgForm();
+        }
+        else if(what_operation.equals("div")){
+            return h1.divisionOfNumber(h2).returnNumberInAlgForm();
+        }
+        else if(what_operation.equals("sub")){
+            return h1.subtractionOfNumbers(h2).returnNumberInAlgForm();
         }
         else{
             return "0";

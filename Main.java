@@ -1,9 +1,11 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Класс, содержащий в себе главный цикл программы, создающий консольное приложение.
+ */
 public class Main {
-
-    public static void main(String[] args) throws InputMismatchException {
+    public static void main(String[] args){
 
         while (true) {
             Scanner enter = new Scanner(System.in);
@@ -42,7 +44,8 @@ public class Main {
                                     System.out.println("Выберите дальнейшие действия с числом:");
                                     System.out.println("1 - Прибавить другое число.");
                                     System.out.println("2 - Умножить на другое число.");
-                                    System.out.println("3 - Вывести число в тригонометрической форме.");
+                                    System.out.println("3 - Поделить на другое число.");
+                                    System.out.println("4 - Вывести число в тригонометрической форме.");
                                     System.out.println("0 - Выйти из программы.");
                                     chooseWithNumb = enter.nextInt();
                                     if (chooseWithNumb != -1) {
@@ -69,9 +72,18 @@ public class Main {
                                 h1.productOfNumbers(h2).printNumberInAlgForm();
                                 System.out.println();
                             } else if (chooseWithNumb == 3) {
+                                System.out.println("Введите число, на которое нужно поделить:");
+                                ComplexNumber h2 = new ComplexNumber();
+                                t.enterComplexNumber(h2);
+                                System.out.print("Частное введенных чисел равно = ");
+                                h1.divisionOfNumber(h2).printNumberInAlgForm();
+                                System.out.println();
+
+                            }else if(chooseWithNumb == 4){
                                 System.out.println("Число в тригонометрической форме:");
                                 h1.printNumberInTrigForm();
-                            } else if (chooseWithNumb == 0) {
+                            }
+                            else if (chooseWithNumb == 0) {
                                 break;
                             } else {
                                 System.out.println("Действия под такой цифрой еще нет!");
@@ -95,6 +107,7 @@ public class Main {
                             System.out.println("1 - Сложить с другой матрицей.");
                             System.out.println("2 - Умножить на другую матрицу.");
                             System.out.println("3 - Вывести транспонированную матрицу.");
+                            System.out.println("4 - Сосчитать определитель матрицы.");
                             System.out.println("0 - Выйти из программы.");
                             chooseWithMatrix = enter.nextInt();
                             if(chooseWithMatrix != -1){
@@ -122,7 +135,12 @@ public class Main {
                     } else if (chooseWithMatrix == 3) {
                         System.out.println("Полученная матрица:");
                         h.matrixTransposition();
-                    } else if (chooseWithMatrix == 0) {
+                    }
+                    else if(chooseWithMatrix == 4){
+                        System.out.println("Определитель данной матрицы равен:");
+                        System.out.println(h.detOfMatrix());
+                    }
+                    else if (chooseWithMatrix == 0) {
                         break;
                     } else {
                         System.out.println("Действия под такой цифрой еще нет!");
